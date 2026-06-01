@@ -7,7 +7,7 @@ import Link from 'next/link'
 const NAVY = '#1B3A5C'
 const SAGE = '#7D9B7F'
 const OFF_WHITE = '#f5f0eb'
-const BUY_URL = 'https://buy.stripe.com/14AfZi5qefAS7YXcoNfjG03'
+const BUY_URL = 'https://buy.stripe.com/00w00kcSG3Saa759cBfjG02'
 
 // ─── Accordion primitives ─────────────────────────────────────────────────────
 
