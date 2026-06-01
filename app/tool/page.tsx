@@ -526,8 +526,25 @@ export default function ToolPage() {
                     onChange={(e) => field.onChange(e.target.value)}
                     placeholder={field.placeholder}
                     rows={5}
+                    maxLength={3000}
                     className="w-full min-h-[120px] px-4 py-3 border border-gray-200 rounded-[10px] text-[15px] leading-[1.65] text-gray-900 placeholder-gray-300 resize-vertical focus:outline-none focus:border-[#7D9B7F] focus:ring-2 focus:ring-[#7D9B7F]/20 transition-all duration-150"
                   />
+                  <div className="flex justify-between items-center mt-1.5">
+                    <span className={`text-[11px] ${
+                      field.value.trim().split(/\s+/).filter(Boolean).length < 20
+                        ? 'text-gray-300'
+                        : 'text-[#7D9B7F]'
+                    }`}>
+                      {field.value.trim() === '' ? 'More detail = more precise results' :
+                        field.value.trim().split(/\s+/).filter(Boolean).length < 20
+                          ? `${field.value.trim().split(/\s+/).filter(Boolean).length} words — a little more detail will improve your results`
+                          : `${field.value.trim().split(/\s+/).filter(Boolean).length} words ✓`
+                      }
+                    </span>
+                    <span className="text-[11px] text-gray-300">
+                      {field.value.length} / 3000
+                    </span>
+                  </div>
                 </div>
               ))}
             </div>
@@ -576,12 +593,30 @@ export default function ToolPage() {
             </div>
           )}
 
-          {/* Loading skeleton */}
+          {/* Loading skeleton with status message */}
           {isGenerating && streamText.length === 0 && (
-            <div className="bg-white border border-gray-200 rounded-card shadow-card p-6 space-y-3">
-              <div className="skeleton-bar h-4 w-2/3" />
-              <div className="skeleton-bar h-4 w-full" />
-              <div className="skeleton-bar h-4 w-5/6" />
+            <div className="bg-white border border-gray-200 rounded-card shadow-card p-8">
+              <div className="flex flex-col items-center text-center gap-4">
+                <div className="w-10 h-10 rounded-full bg-[#F0F5F0] flex items-center justify-center">
+                  <svg className="w-5 h-5 text-[#7D9B7F] animate-spin" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="font-semibold text-navy text-[15px] mb-1">
+                    Analysing your situation and building your ranked options…
+                  </p>
+                  <p className="text-[13px] text-gray-400">
+                    This takes about 15–20 seconds. Your personalised income plan is on its way.
+                  </p>
+                </div>
+                <div className="w-full space-y-2.5 mt-2">
+                  <div className="skeleton-bar h-3 w-2/3 mx-auto" />
+                  <div className="skeleton-bar h-3 w-full" />
+                  <div className="skeleton-bar h-3 w-5/6 mx-auto" />
+                </div>
+              </div>
             </div>
           )}
 
