@@ -176,7 +176,7 @@ export default function SalesPage() {
     },
     {
       q: 'Is this a course or a coaching program?',
-      a: 'No. Next Income Finder is a tool. You answer 8 questions, you get a detailed ranked output, and you walk away with a specific first experiment to try this week. There are no modules to work through, no sessions to book, and no timeline beyond the one you set yourself.',
+      a: 'No. Next Income Finder is a tool. You answer 3 questions, you get a detailed ranked output, and you walk away with a specific first experiment to try this week. There are no modules to work through, no sessions to book, and no timeline beyond the one you set yourself.',
     },
     {
       q: "What if I don't recognize myself in any of the options it gives me?",
@@ -283,7 +283,7 @@ export default function SalesPage() {
     {
       fear: "I don't have time for a long course or program right now.",
       reframe:
-        'This is not a course. You answer 8 questions and you get a ranked, specific output you can act on the same day. The whole process takes less time than most people spend staring at a blank page.',
+        'This is not a course. You answer 3 questions and you get a ranked, specific output you can act on the same day. The whole process takes less time than most people spend staring at a blank page.',
     },
     {
       fear: 'What if none of the options are right for me?',
@@ -383,7 +383,7 @@ export default function SalesPage() {
               </em>
             </h1>
             <p className="text-[17px] md:text-[19px] text-gray-600 leading-relaxed max-w-2xl mx-auto mb-8">
-              Answer 8 questions about your real situation today and get a ranked list of income options built around your health, your hours, and what you actually have to work with, so you leave with something specific to start on, not another idea to think about.
+              Answer 3 questions about your real situation today and get a ranked list of income options built around your health, your hours, and what you actually have to work with, so you leave with something specific to start on, not another idea to think about.
             </p>
             <BuyButton className="text-[17px] px-10 py-4 shadow-md" />
             <p className="mt-4 text-sm text-gray-400">
@@ -418,7 +418,7 @@ export default function SalesPage() {
         {/* ── SOCIAL PROOF BAR ─────────────────────────────────────────────── */}
         <section style={{ backgroundColor: OFF_WHITE }} className="py-6 px-5">
           <div className="max-w-3xl mx-auto flex flex-col md:flex-row items-center justify-center gap-4 md:gap-10 text-center">
-            {['8 Questions Only', '$27 Price', 'Instant Access'].map((item, i) => (
+            {['3 Questions Only', '$27 Price', 'Instant Access'].map((item, i) => (
               <div key={i} className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#7D9B7F] shrink-0" />
                 <span className="text-[15px] font-semibold text-[#1B3A5C]">{item}</span>
@@ -620,11 +620,11 @@ export default function SalesPage() {
                 Price goes up soon.
               </p>
               <p className="text-[15px] text-gray-600 leading-relaxed mb-8">
-                A clarity session with a career coach or business mentor runs $150 to $300 for a single hour, and they rarely have time to map every option against your specific health, hours, and budget the way Next Income Finder does. For $27 you get a detailed, ranked output built entirely from your real situation, available the moment you finish answering 8 questions.
+                A clarity session with a career coach or business mentor runs $150 to $300 for a single hour, and they rarely have time to map every option against your specific health, hours, and budget the way Next Income Finder does. For $27 you get a detailed, ranked output built entirely from your real situation, available the moment you finish answering 3 questions.
               </p>
               <BuyButton label="Get My Ranked Income Options — $27" className="text-[16px]" />
               <p className="mt-4 text-[13px] text-gray-400">
-                Instant access. Answer 8 questions and get a specific, ranked output built from your real life today. No long course. No generic advice.
+                Instant access. Answer 3 questions and get a specific, ranked output built from your real life today. No long course. No generic advice.
               </p>
             </div>
           </div>
@@ -641,7 +641,7 @@ export default function SalesPage() {
               <em className="not-italic opacity-80">Start building.</em>
             </h2>
             <p className="text-white/70 text-[16px] leading-relaxed mb-8">
-              Instant access. Answer 8 questions and get a specific, ranked output built from your real life today. No long course. No generic advice.
+              Instant access. Answer 3 questions and get a specific, ranked output built from your real life today. No long course. No generic advice.
             </p>
             <a
               href={BUY_URL}
@@ -698,7 +698,7 @@ export default function SalesPage() {
                 Every week without a direction is a week of real income you don't get back. The clarity you're waiting to feel on your own is not coming, it comes from having something concrete in front of you.
               </p>
               <p className="font-semibold text-[#1B3A5C]">
-                Next Income Finder gives you that in the time it takes to answer 8 questions.
+                Next Income Finder gives you that in the time it takes to answer 3 questions.
               </p>
             </div>
             <div className="mt-8">
@@ -831,7 +831,7 @@ export default function SalesPage() {
               </em>
             </h2>
             <p className="text-[16px] text-gray-500 leading-relaxed mb-8 max-w-lg mx-auto">
-              Answer 8 questions. Get a ranked, specific income plan built around your health, your hours, and your life as it is right now.
+              Answer 3 questions. Get a ranked, specific income plan built around your health, your hours, and your life as it is right now.
             </p>
             <BuyButton label="Get My Ranked Income Options — $27" className="text-[17px] shadow-md" />
             <p className="mt-4 text-[13px] text-gray-400">
