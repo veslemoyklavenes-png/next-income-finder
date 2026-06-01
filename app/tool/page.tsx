@@ -113,7 +113,7 @@ function BlockText({ text, className = '' }: { text: string; className?: string 
   }
 
   lines.forEach((raw, i) => {
-    const line = raw.trim()
+    const line = raw.trim().replace(/^#{1,6}\s*/, '')
     if (!line || line === '---') {
       flushBullets(`bullet-${i}`)
       return
