@@ -458,7 +458,7 @@ export default function ToolPage() {
 
       // Parse + refresh data
       const parsed = parseSections(accumulated)
-      if (!parsed || parsed.section3Options.length < 3) {
+      if (!parsed || parsed.section3Options.length < 5) {
         console.log('[DEBUG] Raw output length:', accumulated.length)
         console.log('[DEBUG] Sections found:', parsed ? Object.keys(parsed).join(',') : 'none')
         console.log('[DEBUG] Options found:', parsed?.section3Options.length ?? 0)
