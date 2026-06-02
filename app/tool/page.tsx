@@ -458,6 +458,12 @@ export default function ToolPage() {
 
       // Parse + refresh data
       const parsed = parseSections(accumulated)
+      if (!parsed || parsed.section3Options.length < 3) {
+        console.log('[DEBUG] Raw output length:', accumulated.length)
+        console.log('[DEBUG] Sections found:', parsed ? Object.keys(parsed).join(',') : 'none')
+        console.log('[DEBUG] Options found:', parsed?.section3Options.length ?? 0)
+        console.log('[DEBUG] Raw text (first 2000):', accumulated.slice(0, 2000))
+      }
       setParsedOutput(parsed)
 
       if (userId) {
@@ -697,7 +703,9 @@ export default function ToolPage() {
               {/* Section 3 */}
               <SectionCard
                 title={parsedOutput.section3Header}
-                copyText={parsedOutput.section3Options.map((o) => o.content).join('\n\n')}
+                copyText={parsedOutput.section3Options.length > 0
+                  ? parsedOutput.section3Options.map((o) => o.content).join('\n\n')
+                  : parsedOutput.section2}
               >
                 {parsedOutput.section3Options.length > 0 ? (
                   <div className="space-y-3">
@@ -710,7 +718,7 @@ export default function ToolPage() {
                     ))}
                   </div>
                 ) : (
-                  <BlockText text={parsedOutput.section3Header} />
+                  <BlockText text={parsedOutput.section2} />
                 )}
               </SectionCard>
 
