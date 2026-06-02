@@ -275,7 +275,7 @@ function SectionCard({
 
       <div
         className={`overflow-hidden transition-all duration-250 ease-in-out ${
-          open ? 'max-h-[3000px] opacity-100' : 'max-h-0 opacity-0'
+          open ? 'max-h-[9999px] opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
         <div className="px-6 pb-6">{children}</div>
@@ -317,7 +317,7 @@ function OptionCard({
 
       <div
         className={`overflow-hidden transition-all duration-250 ease-in-out ${
-          open ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
+          open ? 'max-h-[9999px] opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
         <div className="px-5 pb-5 border-t border-gray-100">
