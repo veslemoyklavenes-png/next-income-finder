@@ -390,27 +390,13 @@ export default function SalesPage() {
               Instant access. No course. No generic advice.
             </p>
 
-            {/* ── Mockup placeholder ── */}
-            <div className="mt-12 mx-auto max-w-2xl rounded-2xl border-2 border-dashed border-[rgba(125,155,127,0.35)] bg-[#f9faf9] py-12 px-6 flex flex-col items-center gap-2 text-center">
-              <svg
-                className="w-8 h-8 text-[#7D9B7F] opacity-50 mb-1"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={1.5}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3 12V6.75A2.25 2.25 0 015.25 4.5h13.5A2.25 2.25 0 0121 6.75v10.5A2.25 2.25 0 0118.75 19.5H5.25A2.25 2.25 0 013 17.25V12z"
-                />
-              </svg>
-              <p className="text-[13px] text-gray-400 font-medium">
-                Place a mockup or a visual from your tool here.
-              </p>
-              <p className="text-[12px] text-gray-300">
-                Upload a screenshot of the tool output at its best.
-              </p>
+            {/* ── Tool mockup ── */}
+            <div className="mt-12 mx-auto max-w-2xl rounded-2xl overflow-hidden shadow-xl border border-gray-100">
+              <img
+                src="/tool-mockup.png"
+                alt="Next Income Finder — your ranked income options"
+                className="w-full h-auto block"
+              />
             </div>
           </div>
         </section>
