@@ -61,13 +61,24 @@ function parseSections(text: string): ParsedOutput | null {
 }
 
 function parseOptions(text: string): IncomeOption[] {
-  // Split on lines like "**1." or "1." at the start of a block
-  const blocks = text.split(/(?=\n?\*{0,2}[1-5]\.\s+)/).filter((b) =>
-    /^[\s*]*[1-5]\.\s+/.test(b.trim())
+  // Match any of these formats:
+  //   **1. Name**  |  1. **Name**  |  1. Name  |  **Option 1: Name**  |  Option 1: Name
+  const optionRegex = /(?=\n?(?:\*{0,2}(?:Option\s+)?[1-5][\.:]\s*|\*{0,2}[1-5]\.\s+))/gi
+  const blocks = text.split(optionRegex).filter((b) =>
+    /^[\s*]*(?:Option\s+)?[1-5][\.:]/i.test(b.trim())
   )
 
-  return blocks.slice(0, 5).map((block, i) => {
-    const nameMatch = block.match(/[1-5]\.\s+\*{0,2}([^\n*]+)\*{0,2}/)
+  // If regex split didn't find blocks, try splitting on bold headings as fallback
+  const finalBlocks = blocks.length >= 2 ? blocks : (() => {
+    const fallback = text.split(/(?=\n\*\*[^\n*]+\*\*\n)/).filter((b) => b.trim().length > 50)
+    return fallback.length >= 2 ? fallback : [text]
+  })()
+
+  return finalBlocks.slice(0, 5).map((block, i) => {
+    // Try to extract name from various formats
+    const nameMatch =
+      block.match(/(?:Option\s+)?[1-5][\.:]\s*\*{0,2}([^\n*:]+)\*{0,2}/) ||
+      block.match(/\*\*([^\n*:]+)\*\*/)
     return {
       number: i + 1,
       name: nameMatch ? nameMatch[1].trim() : `Option ${i + 1}`,
