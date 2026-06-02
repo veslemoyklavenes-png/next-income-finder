@@ -390,11 +390,11 @@ export default function SalesPage() {
               Instant access. No course. No generic advice.
             </p>
 
-            {/* ── Tool mockup ── */}
-            <div className="mt-12 mx-auto max-w-2xl rounded-2xl overflow-hidden shadow-xl border border-gray-100">
+            {/* ── Hero photo ── */}
+            <div className="mt-12 mx-auto max-w-2xl rounded-2xl overflow-hidden shadow-2xl border border-gray-100">
               <img
-                src="/tool-mockup.png"
-                alt="Next Income Finder — your ranked income options"
+                src="/hero-photo.png"
+                alt="Next Income Finder — a real plan for your real life"
                 className="w-full h-auto block"
               />
             </div>
@@ -539,6 +539,22 @@ export default function SalesPage() {
                   </ul>
                 </AccordionItem>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── Tool mockup ─────────────────────────────────────────────────── */}
+        <section className="bg-white pb-10 px-5">
+          <div className="max-w-2xl mx-auto">
+            <p className="text-center text-[13px] uppercase tracking-widest font-medium text-[#7D9B7F] mb-4">
+              What your results look like
+            </p>
+            <div className="rounded-2xl overflow-hidden shadow-xl border border-gray-100">
+              <img
+                src="/tool-mockup.png"
+                alt="Next Income Finder output — 5 ranked income options"
+                className="w-full h-auto block"
+              />
             </div>
           </div>
         </section>
