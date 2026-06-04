@@ -673,7 +673,7 @@ export default function SalesPage() {
             </div>
             <div className="space-y-4 text-[15px] text-gray-600 leading-relaxed">
               <p>
-                I'm a geoscientist, entrepreneur, and mentor, and I've navigated layoffs, career pivots, health challenges, menopause, and raising two children while building meaningful work from scratch more than once.
+                I'm a geoscientist, entrepreneur, and mentor. Most of my career pivots came from external disruptions — layoffs, industry shifts, the demands of raising two children while building something meaningful. But it was a recent health challenge that stopped me in my tracks and made me build this tool.
               </p>
               <p>
                 I built Next Income Finder because I kept watching the same pattern play out: a carefully constructed life gets interrupted by something nobody planned for, and the advice that follows assumes unlimited energy, time, and freedom to start over. Real life doesn't work that way.
@@ -749,45 +749,16 @@ export default function SalesPage() {
             </h2>
 
             <div className="rounded-2xl border border-[rgba(52,38,32,0.1)] overflow-hidden">
-              <div className="divide-y divide-[rgba(52,38,32,0.07)]">
-                {valueItems.map((item, i) => (
-                  <div
-                    key={i}
-                    className="flex items-start justify-between gap-4 px-5 py-4"
-                  >
-                    <div className="flex items-start gap-3">
-                      <Check />
-                      <span className="text-[14px] text-gray-700 leading-relaxed">
-                        {item.label}
-                      </span>
-                    </div>
-                    <span className="text-[14px] font-semibold text-gray-400 shrink-0 line-through decoration-gray-300">
-                      {item.value}
-                    </span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Total row */}
-              <div style={{ backgroundColor: OFF_WHITE }} className="px-5 py-5 border-t border-[rgba(52,38,32,0.1)]">
+              <div style={{ backgroundColor: OFF_WHITE }} className="px-5 py-5">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-[15px] text-gray-500">Total value</span>
-                  <span className="text-[15px] font-semibold text-gray-400 line-through">
-                    $265
-                  </span>
-                </div>
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-[17px] font-bold text-[#1B3A5C]">Today</span>
+                  <span className="text-[17px] font-bold text-[#1B3A5C]">Next Income Finder</span>
                   <span className="text-[28px] font-extrabold font-lora text-[#1B3A5C]">
                     $27
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-[13px]" style={{ color: SAGE }}>
-                    Launch pricing only. Price goes up soon.
-                  </span>
-                  <span className="text-[13px] font-semibold" style={{ color: SAGE }}>
-                    Save $238
+                    Launch pricing. Instant access.
                   </span>
                 </div>
               </div>
