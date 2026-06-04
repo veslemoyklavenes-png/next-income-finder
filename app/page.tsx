@@ -295,26 +295,11 @@ export default function SalesPage() {
   // ── Value stack items ─────────────────────────────────────────────────────────
 
   const valueItems = [
-    {
-      label: 'Personalized income options ranked by how realistic they are for your exact situation',
-      value: '$97',
-    },
-    {
-      label: 'A plain-language breakdown of what each income type actually involves day to day',
-      value: '$47',
-    },
-    {
-      label: 'Time-to-first-income and weekly energy demand for every option',
-      value: '$37',
-    },
-    {
-      label: 'One concrete first experiment for this week, specific to Option 1',
-      value: '$47',
-    },
-    {
-      label: 'A forward-looking next-step guide so you know exactly what to do after your first experiment',
-      value: '$37',
-    },
+    { label: 'Personalized income options ranked by how realistic they are for your exact situation' },
+    { label: 'A plain-language breakdown of what each income type actually involves day to day' },
+    { label: 'Time-to-first-income and weekly energy demand for every option' },
+    { label: 'One concrete first experiment for this week, specific to Option 1' },
+    { label: 'A forward-looking next-step guide so you know exactly what to do after your first experiment' },
   ]
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -749,9 +734,23 @@ export default function SalesPage() {
             </h2>
 
             <div className="rounded-2xl border border-[rgba(52,38,32,0.1)] overflow-hidden">
-              <div style={{ backgroundColor: OFF_WHITE }} className="px-5 py-5">
+              <div className="divide-y divide-[rgba(52,38,32,0.07)]">
+                {valueItems.map((item, i) => (
+                  <div
+                    key={i}
+                    className="flex items-start gap-3 px-5 py-4"
+                  >
+                    <Check />
+                    <span className="text-[14px] text-gray-700 leading-relaxed">
+                      {item.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              <div style={{ backgroundColor: OFF_WHITE }} className="px-5 py-5 border-t border-[rgba(52,38,32,0.1)]">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-[17px] font-bold text-[#1B3A5C]">Next Income Finder</span>
+                  <span className="text-[17px] font-bold text-[#1B3A5C]">Today</span>
                   <span className="text-[28px] font-extrabold font-lora text-[#1B3A5C]">
                     $27
                   </span>
