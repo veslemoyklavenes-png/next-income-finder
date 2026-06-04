@@ -1,4 +1,5 @@
 import { createServerClient } from '@supabase/ssr'
+import { createClient } from '@supabase/supabase-js'
 import { NextResponse, type NextRequest } from 'next/server'
 
 export async function middleware(request: NextRequest) {
@@ -35,8 +36,28 @@ export async function middleware(request: NextRequest) {
     request.nextUrl.pathname.startsWith(p)
   )
 
-  if (isProtected && !session) {
+  if (!isProtected) return response
+
+  // Not logged in → go to login
+  if (!session) {
     return NextResponse.redirect(new URL('/login', request.url))
+  }
+
+  // Logged in → check if paid
+  const supabaseAdmin = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  )
+
+  const email = session.user.email?.toLowerCase()
+  const { data: paid } = await supabaseAdmin
+    .from('paid_users')
+    .select('email')
+    .eq('email', email)
+    .maybeSingle()
+
+  if (!paid) {
+    return NextResponse.redirect(new URL('/paywall', request.url))
   }
 
   return response
