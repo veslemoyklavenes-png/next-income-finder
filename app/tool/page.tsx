@@ -336,6 +336,16 @@ function OptionCard({
   )
 }
 
+// ─── Energy levels ───────────────────────────────────────────────────────────
+
+const ENERGY_LEVELS = [
+  { value: 1, label: 'Svært begrenset', description: 'Jeg må velge nøye hva jeg bruker energi på' },
+  { value: 2, label: 'Begrenset', description: 'Noen gode timer per dag, ikke mer' },
+  { value: 3, label: 'Varierende', description: 'Noen dager bra, noen dager tøffe' },
+  { value: 4, label: 'Ganske bra', description: 'Jeg har kapasitet, men ikke ubegrenset' },
+  { value: 5, label: 'Bra', description: 'Jeg har energi til å ta på meg mer nå' },
+]
+
 // ─── Main page ────────────────────────────────────────────────────────────────
 
 export default function ToolPage() {
@@ -344,6 +354,7 @@ export default function ToolPage() {
   const [situation, setSituation] = useState('')
   const [skills, setSkills] = useState('')
   const [matters, setMatters] = useState('')
+  const [energyLevel, setEnergyLevel] = useState<number | null>(null)
 
   const [isGenerating, setIsGenerating] = useState(false)
   const [streamText, setStreamText] = useState('')
@@ -447,7 +458,11 @@ export default function ToolPage() {
       const res = await fetch('/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ situation, skills, matters, ...(previousContext ? { previousContext } : {}) }),
+        body: JSON.stringify({
+          situation, skills, matters,
+          ...(previousContext ? { previousContext } : {}),
+          ...(energyLevel ? { energyLevel: ENERGY_LEVELS.find(e => e.value === energyLevel)?.label + ' — ' + ENERGY_LEVELS.find(e => e.value === energyLevel)?.description } : {}),
+        }),
       })
 
       if (!res.ok) {
@@ -606,6 +621,39 @@ export default function ToolPage() {
                   </div>
                 </div>
               ))}
+            </div>
+
+            {/* Energy level selector */}
+            <div className="mt-5 pt-5 border-t border-gray-100">
+              <label className="block text-[12px] uppercase tracking-[0.06em] font-medium text-[#888] mb-3">
+                Energinivå denne uken <span className="text-gray-300 normal-case tracking-normal font-normal">(valgfritt)</span>
+              </label>
+              <div className="flex flex-col gap-2">
+                {ENERGY_LEVELS.map((level) => (
+                  <button
+                    key={level.value}
+                    type="button"
+                    onClick={() => setEnergyLevel(energyLevel === level.value ? null : level.value)}
+                    className={`flex items-center gap-3 px-4 py-3 rounded-xl border text-left transition-all duration-150 cursor-pointer ${
+                      energyLevel === level.value
+                        ? 'border-[#7D9B7F] bg-[#F0F5F0]'
+                        : 'border-gray-200 bg-white hover:border-gray-300'
+                    }`}
+                  >
+                    <div className={`w-4 h-4 rounded-full border-2 shrink-0 flex items-center justify-center transition-all ${
+                      energyLevel === level.value ? 'border-[#7D9B7F] bg-[#7D9B7F]' : 'border-gray-300'
+                    }`}>
+                      {energyLevel === level.value && (
+                        <div className="w-2 h-2 rounded-full bg-white" />
+                      )}
+                    </div>
+                    <div>
+                      <span className="text-[14px] font-medium text-gray-800">{level.label}</span>
+                      <span className="text-[13px] text-gray-400 ml-2">{level.description}</span>
+                    </div>
+                  </button>
+                ))}
+              </div>
             </div>
 
             {error && (
