@@ -351,6 +351,7 @@ export default function ToolPage() {
 
   const [optionsDefaultOpen, setOptionsDefaultOpen] = useState(true)
   const [copiedAll, setCopiedAll] = useState(false)
+  const [deletingHistory, setDeletingHistory] = useState(false)
 
   const outputRef = useRef<HTMLDivElement>(null)
 
@@ -474,6 +475,27 @@ export default function ToolPage() {
     } finally {
       setIsGenerating(false)
     }
+  }
+
+  const handleBuildOn = () => {
+    const topOption = parsedOutput?.section3Options?.[0]?.name ?? 'the top option'
+    const currentSituation = situation.trim()
+    setSituation(
+      `Following up on my previous result. I tried ${topOption}. Here is what happened:\n\n[Write what you tried and what you learned here]\n\nOriginal situation: ${currentSituation}`
+    )
+    setParsedOutput(null)
+    setStreamText('')
+    setHasGenerated(false)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const handleDeleteHistory = async () => {
+    if (!userId) return
+    if (!window.confirm('Er du sikker på at du vil slette all historikk? Dette kan ikke angres.')) return
+    setDeletingHistory(true)
+    await supabase.from('generation_history').delete().eq('user_id', userId)
+    setHistory([])
+    setDeletingHistory(false)
   }
 
   const handleCopyAll = async () => {
@@ -744,6 +766,22 @@ export default function ToolPage() {
             </div>
           )}
 
+          {/* Build on result button */}
+          {parsedOutput && !isGenerating && (
+            <div className="mt-4 text-center">
+              <button
+                onClick={handleBuildOn}
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl border-2 border-[#7D9B7F] text-[#7D9B7F] font-semibold text-[14px] hover:bg-[#F0F5F0] transition-all duration-150 cursor-pointer"
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                </svg>
+                Bygg videre på dette resultatet
+              </button>
+              <p className="text-[12px] text-gray-400 mt-2">Forhåndsfyller skjemaet med hva du lærte — så neste plan bygger på ekte erfaring</p>
+            </div>
+          )}
+
           {/* Fallback: raw text after streaming if parse failed */}
           {!isGenerating && hasGenerated && streamText && !parsedOutput && (
             <div className="bg-white border border-gray-200 rounded-card shadow-card p-6 animate-fade-in-up">
@@ -761,9 +799,10 @@ export default function ToolPage() {
         {/* ── Previous results ── */}
         {history.length > 0 && (
           <div className="mt-8">
+            <div className="flex items-center justify-between mb-3">
             <button
               onClick={() => setHistoryOpen((o) => !o)}
-              className="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors cursor-pointer mb-3"
+              className="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors cursor-pointer"
             >
               <svg
                 className={`w-4 h-4 transition-transform duration-200 ${historyOpen ? '' : '-rotate-90'}`}
@@ -776,6 +815,14 @@ export default function ToolPage() {
               </svg>
               Previous Results ({history.length})
             </button>
+            <button
+              onClick={handleDeleteHistory}
+              disabled={deletingHistory}
+              className="text-[11px] text-gray-300 hover:text-red-400 transition-colors cursor-pointer disabled:opacity-50"
+            >
+              {deletingHistory ? 'Sletter…' : 'Slett historikk'}
+            </button>
+          </div>
 
             <div
               className={`overflow-hidden transition-all duration-250 ease-in-out ${
