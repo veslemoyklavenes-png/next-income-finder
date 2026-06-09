@@ -75,14 +75,22 @@ function parseOptions(text: string): IncomeOption[] {
   })()
 
   return finalBlocks.slice(0, 5).map((block, i) => {
-    // Try to extract name from various formats
+    const trimmed = block.trim()
+    // Extract name from first line: "1. Name" or "**1. Name**" or "1. **Name**"
     const nameMatch =
-      block.match(/(?:Option\s+)?[1-5][\.:]\s*\*{0,2}([^\n*:]+)\*{0,2}/) ||
-      block.match(/\*\*([^\n*:]+)\*\*/)
+      trimmed.match(/^\*{0,2}(?:Option\s+)?[1-5]\.[ \t]\*{0,2}([^\n*]+)\*{0,2}/) ||
+      trimmed.match(/\*\*([^\n*:]+)\*\*/)
+    const name = nameMatch ? nameMatch[1].trim() : `Option ${i + 1}`
+
+    // Remove the first line (number + name) from the content so it's not shown twice
+    const contentWithoutTitle = trimmed
+      .replace(/^\*{0,2}(?:Option\s+)?[1-5]\.[ \t][^\n]*\n?/, '')
+      .trim()
+
     return {
       number: i + 1,
-      name: nameMatch ? nameMatch[1].trim() : `Option ${i + 1}`,
-      content: block.trim(),
+      name,
+      content: contentWithoutTitle,
     }
   })
 }
