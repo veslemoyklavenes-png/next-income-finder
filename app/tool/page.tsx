@@ -352,6 +352,8 @@ export default function ToolPage() {
   const [optionsDefaultOpen, setOptionsDefaultOpen] = useState(true)
   const [copiedAll, setCopiedAll] = useState(false)
   const [deletingHistory, setDeletingHistory] = useState(false)
+  const [confirmDelete, setConfirmDelete] = useState(false)
+  const [previousContext, setPreviousContext] = useState<string | null>(null)
 
   const outputRef = useRef<HTMLDivElement>(null)
 
@@ -437,7 +439,7 @@ export default function ToolPage() {
       const res = await fetch('/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ situation, skills, matters }),
+        body: JSON.stringify({ situation, skills, matters, ...(previousContext ? { previousContext } : {}) }),
       })
 
       if (!res.ok) {
@@ -467,6 +469,7 @@ export default function ToolPage() {
       }
       setParsedOutput(parsed)
 
+      setPreviousContext(null) // clear after use
       if (userId) {
         await Promise.all([fetchUsage(userId), fetchHistory(userId)])
       }
@@ -479,6 +482,16 @@ export default function ToolPage() {
 
   const handleBuildOn = () => {
     const topOption = parsedOutput?.section3Options?.[0]?.name ?? 'the top option'
+
+    // Build context summary from previous result to send silently to the API
+    if (parsedOutput) {
+      const optionNames = parsedOutput.section3Options
+        .map((o, i) => `${i + 1}. ${o.name}`)
+        .join('\n')
+      const context = `Previous top 5 options recommended:\n${optionNames}\n\nPrevious first move: ${parsedOutput.section4.slice(0, 300)}`
+      setPreviousContext(context)
+    }
+
     setSituation(
       `Update: I tried "${topOption}" from my last result.\n\nWhat happened: [describe what you tried and what you learned]\n\nWhat has changed: [any changes to your health, energy, schedule, or finances since last time]`
     )
@@ -490,11 +503,11 @@ export default function ToolPage() {
 
   const handleDeleteHistory = async () => {
     if (!userId) return
-    if (!window.confirm('Er du sikker på at du vil slette all historikk? Dette kan ikke angres.')) return
     setDeletingHistory(true)
     await supabase.from('generation_history').delete().eq('user_id', userId)
     setHistory([])
     setDeletingHistory(false)
+    setConfirmDelete(false)
   }
 
   const handleCopyAll = async () => {
@@ -814,13 +827,31 @@ export default function ToolPage() {
               </svg>
               Previous Results ({history.length})
             </button>
-            <button
-              onClick={handleDeleteHistory}
-              disabled={deletingHistory}
-              className="text-[11px] text-gray-300 hover:text-red-400 transition-colors cursor-pointer disabled:opacity-50"
-            >
-              {deletingHistory ? 'Sletter…' : 'Slett historikk'}
-            </button>
+            {!confirmDelete ? (
+              <button
+                onClick={() => setConfirmDelete(true)}
+                className="text-[11px] text-gray-300 hover:text-red-400 transition-colors cursor-pointer"
+              >
+                Slett historikk
+              </button>
+            ) : (
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] text-gray-400">Sletter all historikk permanent.</span>
+                <button
+                  onClick={handleDeleteHistory}
+                  disabled={deletingHistory}
+                  className="text-[11px] text-red-500 font-semibold hover:text-red-700 cursor-pointer disabled:opacity-50"
+                >
+                  {deletingHistory ? 'Sletter…' : 'Ja, slett alt'}
+                </button>
+                <button
+                  onClick={() => setConfirmDelete(false)}
+                  className="text-[11px] text-gray-400 hover:text-gray-600 cursor-pointer"
+                >
+                  Avbryt
+                </button>
+              </div>
+            )}
           </div>
 
             <div

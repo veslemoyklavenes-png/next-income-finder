@@ -123,14 +123,14 @@ export async function POST(request: Request) {
   }
 
   // Parse + validate inputs
-  let inputs: { situation: string; skills: string; matters: string }
+  let inputs: { situation: string; skills: string; matters: string; previousContext?: string }
   try {
     inputs = await request.json()
   } catch {
     return new Response('Invalid JSON', { status: 400 })
   }
 
-  const { situation, skills, matters } = inputs
+  const { situation, skills, matters, previousContext } = inputs
   if (!situation?.trim() || !skills?.trim() || !matters?.trim()) {
     return new Response(
       JSON.stringify({ error: 'All three fields are required.' }),
@@ -145,7 +145,10 @@ Field 2 - Your skills and experience:
 ${skills.trim()}
 
 Field 3 - What matters most to you right now:
-${matters.trim()}`
+${matters.trim()}${previousContext ? `
+
+[Context from this user's previous session — use this to build on what was already recommended and avoid repeating the same options unless they are still the best fit:]
+${previousContext}` : ''}`
 
   const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! })
   const encoder = new TextEncoder()
