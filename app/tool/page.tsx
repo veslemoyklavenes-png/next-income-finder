@@ -157,11 +157,11 @@ function BlockText({ text, className = '' }: { text: string; className?: string 
       return
     }
 
-    // Full-line bold heading
-    const headingMatch = line.match(/^\*\*(.+)\*\*$/)
+    // Full-line bold heading: **Heading** or **Heading:**
+    const headingMatch = line.match(/^\*\*(.+?)\*\*:?\s*$/)
     if (headingMatch) {
       nodes.push(
-        <p key={i} className="font-semibold text-navy text-[15px] leading-[1.65] mt-3 mb-1">
+        <p key={i} className="font-semibold text-[#7D9B7F] text-[14px] leading-[1.65] mt-4 mb-1">
           {headingMatch[1]}
         </p>
       )
@@ -313,7 +313,7 @@ function OptionCard({
           <span className="w-6 h-6 rounded-full bg-[#7D9B7F] text-white text-xs font-bold flex items-center justify-center shrink-0">
             {option.number}
           </span>
-          <span className="font-semibold text-navy text-[15px] truncate">
+          <span className="font-semibold text-navy text-[15px] leading-snug line-clamp-2">
             {option.name}
           </span>
         </div>
