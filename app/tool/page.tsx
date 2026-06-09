@@ -61,11 +61,11 @@ function parseSections(text: string): ParsedOutput | null {
 }
 
 function parseOptions(text: string): IncomeOption[] {
-  // Match any of these formats:
-  //   **1. Name**  |  1. **Name**  |  1. Name  |  **Option 1: Name**  |  Option 1: Name
-  const optionRegex = /(?=\n?(?:\*{0,2}(?:Option\s+)?[1-5][\.:]\s*|\*{0,2}[1-5]\.\s+))/gi
+  // Match numbered options like "1. " or "**1. " — require space after dot to avoid
+  // splitting on numbers like "2.000" or "10.000"
+  const optionRegex = /(?=\n?\*{0,2}(?:Option\s+)?[1-5]\.[ \t])/gi
   const blocks = text.split(optionRegex).filter((b) =>
-    /^[\s*]*(?:Option\s+)?[1-5][\.:]/i.test(b.trim())
+    /^\*{0,2}(?:Option\s+)?[1-5]\.[ \t]/i.test(b.trim())
   )
 
   // If regex split didn't find blocks, try splitting on bold headings as fallback
@@ -479,9 +479,8 @@ export default function ToolPage() {
 
   const handleBuildOn = () => {
     const topOption = parsedOutput?.section3Options?.[0]?.name ?? 'the top option'
-    const currentSituation = situation.trim()
     setSituation(
-      `Following up on my previous result. I tried ${topOption}. Here is what happened:\n\n[Write what you tried and what you learned here]\n\nOriginal situation: ${currentSituation}`
+      `Update: I tried "${topOption}" from my last result.\n\nWhat happened: [describe what you tried and what you learned]\n\nWhat has changed: [any changes to your health, energy, schedule, or finances since last time]`
     )
     setParsedOutput(null)
     setStreamText('')
