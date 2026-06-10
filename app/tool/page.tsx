@@ -32,13 +32,15 @@ interface ParsedOutput {
 // ─── Parsers ──────────────────────────────────────────────────────────────────
 
 function parseSections(text: string): ParsedOutput | null {
-  // Split on "Section N" markers (with optional surrounding ** and varying separators)
-  const parts = text.split(/(?=\*{0,2}Section\s+[1-5]\b)/gi)
+  // Split on "Section N" markers, but only at the start of a line — the model
+  // sometimes references sections mid-sentence ("see Section 4") and that must
+  // not split the text
+  const parts = text.split(/(?=^\s*#{0,6}\s*\*{0,2}Section\s+[1-5]\b)/gim)
 
   const sectionMap: Record<number, string> = {}
   for (const part of parts) {
-    const m = part.match(/^\*{0,2}Section\s+(\d+)[^*\n]*\*{0,2}\n?([\s\S]*)/)
-    if (m) {
+    const m = part.match(/^\s*#{0,6}\s*\*{0,2}Section\s+(\d+)[^\n]*\n?([\s\S]*)/)
+    if (m && !sectionMap[Number(m[1])]) {
       sectionMap[Number(m[1])] = m[2].trim()
     }
   }
