@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 
-const BUY_URL = 'https://buy.stripe.com/00w00kcSG3Saa759cBfjG02'
+const BUY_URL = 'https://buy.stripe.com/cNi6oI05U9cucfdcoNfjG04'
 const SAGE = '#7D9B7F'
 const NAVY = '#1B3A5C'
 
