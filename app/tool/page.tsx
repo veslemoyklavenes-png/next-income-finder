@@ -341,11 +341,11 @@ function OptionCard({
 // ─── Energy levels ───────────────────────────────────────────────────────────
 
 const ENERGY_LEVELS = [
-  { value: 1, label: 'Svært begrenset', description: 'Jeg må velge nøye hva jeg bruker energi på' },
-  { value: 2, label: 'Begrenset', description: 'Noen gode timer per dag, ikke mer' },
-  { value: 3, label: 'Varierende', description: 'Noen dager bra, noen dager tøffe' },
-  { value: 4, label: 'Ganske bra', description: 'Jeg har kapasitet, men ikke ubegrenset' },
-  { value: 5, label: 'Bra', description: 'Jeg har energi til å ta på meg mer nå' },
+  { value: 1, label: 'Very limited', description: 'I have to choose carefully what I spend energy on' },
+  { value: 2, label: 'Limited', description: 'A few good hours a day, not more' },
+  { value: 3, label: 'Up and down', description: 'Some days are good, some days are hard' },
+  { value: 4, label: 'Fairly good', description: 'I have capacity, but not unlimited' },
+  { value: 5, label: 'Good', description: 'I have energy to take on more right now' },
 ]
 
 // ─── Main page ────────────────────────────────────────────────────────────────
@@ -628,7 +628,7 @@ export default function ToolPage() {
             {/* Energy level selector */}
             <div className="mt-5 pt-5 border-t border-gray-100">
               <label className="block text-[12px] uppercase tracking-[0.06em] font-medium text-[#888] mb-3">
-                Energinivå denne uken <span className="text-gray-300 normal-case tracking-normal font-normal">(valgfritt)</span>
+                Your energy level this week <span className="text-gray-300 normal-case tracking-normal font-normal">(optional)</span>
               </label>
               <div className="flex flex-col gap-2">
                 {ENERGY_LEVELS.map((level) => (
@@ -846,9 +846,9 @@ export default function ToolPage() {
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
                 </svg>
-                Bygg videre på dette resultatet
+                Build on this result
               </button>
-              <p className="text-[12px] text-gray-400 mt-2">Forhåndsfyller skjemaet med hva du lærte — så neste plan bygger på ekte erfaring</p>
+              <p className="text-[12px] text-gray-400 mt-2">Pre-fills the form with what you tried — so your next plan builds on real experience</p>
             </div>
           )}
 
@@ -890,23 +890,23 @@ export default function ToolPage() {
                 onClick={() => setConfirmDelete(true)}
                 className="text-[11px] text-gray-300 hover:text-red-400 transition-colors cursor-pointer"
               >
-                Slett historikk
+                Delete history
               </button>
             ) : (
               <div className="flex items-center gap-2">
-                <span className="text-[11px] text-gray-400">Sletter all historikk permanent.</span>
+                <span className="text-[11px] text-gray-400">Deletes all history permanently.</span>
                 <button
                   onClick={handleDeleteHistory}
                   disabled={deletingHistory}
                   className="text-[11px] text-red-500 font-semibold hover:text-red-700 cursor-pointer disabled:opacity-50"
                 >
-                  {deletingHistory ? 'Sletter…' : 'Ja, slett alt'}
+                  {deletingHistory ? 'Deleting…' : 'Yes, delete all'}
                 </button>
                 <button
                   onClick={() => setConfirmDelete(false)}
                   className="text-[11px] text-gray-400 hover:text-gray-600 cursor-pointer"
                 >
-                  Avbryt
+                  Cancel
                 </button>
               </div>
             )}
