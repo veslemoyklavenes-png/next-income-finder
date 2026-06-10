@@ -59,7 +59,7 @@ function AccordionItem({
 // ─── CTA Button ───────────────────────────────────────────────────────────────
 
 function BuyButton({
-  label = 'Get My Ranked Income Options — $27',
+  label = 'Get My Ranked Income Options — $17',
   className = '',
 }: {
   label?: string
@@ -315,8 +315,8 @@ export default function SalesPage() {
           style={{ backgroundColor: NAVY }}
           className="w-full py-3 text-center text-white text-sm font-medium tracking-wide"
         >
-          Only $27 now.{' '}
-          <span className="opacity-80">Price goes up soon.</span>
+          Early access — $17.{' '}
+          <span className="opacity-80">You get every improvement as the tool grows. Price goes up at full launch.</span>
         </div>
 
         {/* Nav */}
@@ -347,7 +347,7 @@ export default function SalesPage() {
               href={BUY_URL}
               className="hidden md:inline-block bg-[#1B3A5C] text-white text-sm font-semibold px-5 py-2 rounded-lg hover:bg-[#122740] active:scale-[0.985] transition-all cursor-pointer"
             >
-              Get Access — $27
+              Get Access — $17
             </a>
           </div>
         </nav>
@@ -389,7 +389,7 @@ export default function SalesPage() {
         {/* ── SOCIAL PROOF BAR ─────────────────────────────────────────────── */}
         <section style={{ backgroundColor: OFF_WHITE }} className="py-6 px-5">
           <div className="max-w-3xl mx-auto flex flex-col md:flex-row items-center justify-center gap-4 md:gap-10 text-center">
-            {['3 Questions Only', '$27 Price', 'Instant Access'].map((item, i) => (
+            {['3 Questions Only', '$17 Price', 'Instant Access'].map((item, i) => (
               <div key={i} className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#7D9B7F] shrink-0" />
                 <span className="text-[15px] font-semibold text-[#1B3A5C]">{item}</span>
@@ -601,15 +601,15 @@ export default function SalesPage() {
 
             <div className="rounded-2xl border border-[rgba(52,38,32,0.1)] bg-white p-8 md:p-10 mb-6">
               <p className="text-[56px] font-extrabold font-lora text-[#1B3A5C] leading-none mb-1">
-                $27
+                $17
               </p>
               <p className="text-[13px] text-[#7D9B7F] font-semibold uppercase tracking-wide mb-6">
                 Price goes up soon.
               </p>
               <p className="text-[15px] text-gray-600 leading-relaxed mb-8">
-                A clarity session with a career coach or business mentor runs $150 to $300 for a single hour, and they rarely have time to map every option against your specific health, hours, and budget the way Next Income Finder does. For $27 you get a detailed, ranked output built entirely from your real situation, available the moment you finish answering 3 questions.
+                A clarity session with a career coach or business mentor runs $150 to $300 for a single hour, and they rarely have time to map every option against your specific health, hours, and budget the way Next Income Finder does. For $17 you get a detailed, ranked output built entirely from your real situation, available the moment you finish answering 3 questions.
               </p>
-              <BuyButton label="Get My Ranked Income Options — $27" className="text-[16px]" />
+              <BuyButton label="Get My Ranked Income Options — $17" className="text-[16px]" />
               <p className="mt-4 text-[13px] text-gray-400">
                 Instant access. Answer 3 questions and get a specific, ranked output built from your real life today. No long course. No generic advice.
               </p>
@@ -634,7 +634,7 @@ export default function SalesPage() {
               href={BUY_URL}
               className="inline-block w-full md:w-auto text-center bg-white text-[#1B3A5C] font-bold text-[17px] px-10 py-4 rounded-lg hover:bg-gray-100 active:scale-[0.985] transition-all cursor-pointer"
             >
-              Get My Ranked Income Options — $27
+              Get My Ranked Income Options — $17
             </a>
           </div>
         </section>
@@ -752,12 +752,12 @@ export default function SalesPage() {
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-[17px] font-bold text-[#1B3A5C]">Today</span>
                   <span className="text-[28px] font-extrabold font-lora text-[#1B3A5C]">
-                    $27
+                    $17
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-[13px]" style={{ color: SAGE }}>
-                    Launch pricing. Instant access.
+                    Early access pricing. You get every improvement as the tool grows. Instant access.
                   </span>
                 </div>
               </div>
@@ -805,9 +805,9 @@ export default function SalesPage() {
             <p className="text-[16px] text-gray-500 leading-relaxed mb-8 max-w-lg mx-auto">
               Answer 3 questions. Get a ranked, specific income plan built around your health, your hours, and your life as it is right now.
             </p>
-            <BuyButton label="Get My Ranked Income Options — $27" className="text-[17px] shadow-md" />
+            <BuyButton label="Get My Ranked Income Options — $17" className="text-[17px] shadow-md" />
             <p className="mt-4 text-[13px] text-gray-400">
-              $27 · Instant access · No course, no coaching call, no fluff
+              $17 · Instant access · No course, no coaching call, no fluff
             </p>
           </div>
         </section>

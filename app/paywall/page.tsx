@@ -32,7 +32,7 @@ export default function PaywallPage() {
           className="block w-full py-4 rounded-xl font-bold text-white text-[16px] mb-4 transition-all hover:opacity-90"
           style={{ backgroundColor: NAVY }}
         >
-          Get Next Income Finder — $27
+          Get Next Income Finder — $17
         </a>
 
         <p className="text-[13px] text-gray-400">
